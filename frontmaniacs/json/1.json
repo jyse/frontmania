@@ -1,0 +1,27 @@
+{
+  "name": "Rainbow Glasses MoonBird",
+  "description": "Moonbird loves rainbows",
+  "image": "ipfs://QmYToAPFRrpjtfkQ9T6VRTbJrrBRY8s8NHMCjoWY5u9wnV/1.png",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Lilac"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Dark Gray Hoodie"
+    },
+    {
+      "trait_type": "Fur",
+      "value": "Red"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Rainbow Glasses"
+    },
+    {
+      "trait_type": "Beak",
+      "value": "Dark Gray"
+    }
+  ]
+}

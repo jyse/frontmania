@@ -1,0 +1,27 @@
+{
+  "name": "Blue Haired Geisha",
+  "description": "Anime girl",
+  "image": "",
+  "attributes": [
+    {
+      "trait_type": "Hair",
+      "value": "Blue"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Red"
+    },
+    {
+      "trait_type": "Skin",
+      "value": "Medium"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Turqoise Kimono"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Big Pink Bow"
+    }
+  ]
+}
