@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import abi from "./contracts/contract.json";
 import bgVideo from "./assets/background.mp4";
@@ -27,25 +27,25 @@ function App() {
     setCompleted(true);
   };
 
-  useEffect(() => {
-    if (contract) {
-      getTotalSupply();
-    }
-  }, [contract]);
-
-  const getTotalSupply = async () => {
+  const getTotalSupply = useCallback(async () => {
     //get totalSupply of NFTs minted up until now (current supply actuallyt)
     const totalSupply = await contract.totalSupply();
     console.log(totalSupply, "what is totaly Suppy here?");
     setSupply(totalSupply.toNumber());
-  };
+  }, [contract]);
+
+  useEffect(() => {
+    if (contract) {
+      getTotalSupply();
+    }
+  }, [contract, getTotalSupply]);
 
   const login = async () => {
     console.log("logging in");
     if (typeof window.ethereum !== "undefined") {
       console.log("MetaMask is installed!");
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts"
+        method: "eth_requestAccounts",
       });
       const walletAccount = accounts[0];
       setAccount(walletAccount);
