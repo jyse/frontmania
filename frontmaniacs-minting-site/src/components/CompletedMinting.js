@@ -2,8 +2,8 @@ import React from "react";
 
 const CompletedMinting = ({ address }) => {
   const viewOpenSea = () => {
-    // my contract: 0x3690221b229de9e4f6d95ccf9fbbf2c12e84c3f0
-    const url = `https://testnets.opensea.io/assets/goerli/${address}/0`;
+    const url =
+      "https://testnets.opensea.io/collection/web3builders-eg7du07ybm";
     window.open(url, "_blank");
   };
 
