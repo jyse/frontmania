@@ -15,13 +15,13 @@ contract Frontmaniacs is ERC721, ERC721Enumerable, Ownable {
     uint256 maxSupply = 1000; 
 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://QmV9cujD5uPpgVY9szN9HfPVw5Rd6NTyoTkMwNfe1cUF3i/";
+        return "ipfs://QmRkEy66AczB2yT4mzicSW1sPLhUiM98AwBiKC1aEDHqnC/";
     }
 
-    function safeMint() public {
-        // Make the safeMint function payable
-        // Add a requirement of msg.value >= 0.01 ether
-        // Add a requirement of totalSupply() <= maxSupply
+    function safeMint() public payable {
+        require(msg.value >= 0.01 ether, "Give us more money");
+        require(totalSupply() <= maxSupply, "You have reached the limit of minting!");
+    
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
