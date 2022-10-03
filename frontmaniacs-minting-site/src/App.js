@@ -101,13 +101,13 @@ function App() {
             </div>
             <div className="information">
               <div className="information-header-container">
-                <h4 className="infomration-subheader">
+                <h4 className="information-subheader">
                   1st Frontmania NFT Collection:
                 </h4>
                 <h1 className="information-header">Frontmaniacs </h1>
               </div>
               <div className="information-interactions-container">
-                <p> {supply} / 200 minted</p>
+                <p> {supply} / 1000 minted</p>
                 {/* Step 5: insert getState() */}
                 {account ? (
                   getState()
