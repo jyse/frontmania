@@ -1,86 +1,89 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import abi from "./contracts/contract.json";
 import StartMinting from "./components/StartMinting";
 import InProgressMinting from "./components/InProgressMinting";
 import CompletedMinting from "./components/CompletedMinting";
-import { ethers } from "ethers";
 import Header from "./components/Header";
 import bgVideo from "./assets/backgroundVideo.mp4";
-import nftImage from "./assets/NFT05.png";
+import nftImage from "./assets/NFTImage.png";
+import { ethers } from "ethers";
+import abi from "./manual/abi.json";
 
 function App() {
-  const [account, setAccount] = useState();
   const [inProgress, setInProgress] = useState(false);
   const [completed, setCompleted] = useState(false);
-  const [supply, setSupply] = useState(0);
+  const [account, setAccount] = useState();
   const [contract, setContract] = useState();
+  const [supply, setSupply] = useState(0);
   const [hash, setHash] = useState("");
 
   const mint = async () => {
-    console.log("minting");
+    // Step 4: Write the mint function
     const options = { value: ethers.utils.parseEther("0.01") };
     const transaction = await contract.safeMint(1, options);
-    console.log(transaction, "transaction here ");
+    console.log(transaction, "logging transaction");
     setHash(transaction.hash);
 
-    //We are in progress
+    // Step 7: Set the variables for progress and completed
+    // setInProgress(true)
+    //  await transaction.wait()
+    //  setInProgress(false)
+    //  setCompleted(true)
     setInProgress(true);
     await transaction.wait();
-
-    //We are done
     setInProgress(false);
     setCompleted(true);
   };
 
-  const getTotalSupply = useCallback(async () => {
-    //get totalSupply of NFTs minted up until now (current supply actuallyt)
+  const getTotalSupply = async () => {
+    // Step 3: Add totalSupply and use it from the contract
     const totalSupply = await contract.totalSupply();
     setSupply(totalSupply.toNumber());
-  }, [contract]);
+  };
 
+  // Step 3: Contract => getTotalSupply()
   useEffect(() => {
+    console.log(contract, " what is contract here? 📝🔥");
     if (contract) {
       getTotalSupply();
     }
-  }, [contract, getTotalSupply]);
+  }, [contract]);
 
   const login = async () => {
+    // Step 1: Connect wallet (check Metamask + accounts)
+
     console.log("logging in");
     if (typeof window.ethereum !== "undefined") {
-      console.log("MetaMask is installed!");
+      console.log("Metamask is installed!");
+      window.ethereum.request({ method: "eth_requestAccounts" });
+
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
+        method: "eth_requestAccounts"
       });
       const walletAccount = accounts[0];
       setAccount(walletAccount);
-      const contractAddress = "0x2d8e7ecCF431fD546FC85cE802848E74E6aE3171";
-      // CONNECT CONTRACT TO ETHERS
 
-      // Connect to the network
+      // Step 2: Wire up contract (provider, signer, NFTContract)
+      // ❌👇
+      const contractAddress = "0x3bd5d6612ed5406e310ef366de1fa4354d001281";
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-      // Signer
       const signer = provider.getSigner(walletAccount);
 
-      // We connect to the Contract using a Provider, so we will only
-      // have read-only access to the Contract
       let NFTContract = new ethers.Contract(contractAddress, abi, signer);
-
       setContract(NFTContract);
-      getTotalSupply();
     }
   };
 
   const getState = () => {
     if (inProgress) {
+      // Step 8: Pass in the transaction hash to InProgressMinting Component
       return <InProgressMinting hash={hash} />;
     }
 
     if (completed) {
       return <CompletedMinting />;
     }
-
+    // Step 6: Pass mint as props
     return <StartMinting mint={mint} />;
   };
 
@@ -97,18 +100,28 @@ function App() {
               <img className="nft-image" src={nftImage} alt="image" />
             </div>
             <div className="information">
-              <h2> 1st Frontmania NFT Collection:Frontmaniacs </h2>
-              <p>{supply} minted / 200</p>
-              {account ? (
-                getState()
-              ) : (
-                <div className="connect-button" onClick={login}>
-                  <h3>CONNECT WALLET</h3>
-                </div>
-              )}
+              <div className="information-header-container">
+                <h4 className="infomration-subheader">
+                  1st Frontmania NFT Collection:
+                </h4>
+                <h1 className="information-header">Frontmaniacs </h1>
+              </div>
+              <div className="information-interactions-container">
+                <p> {supply} / 200 minted</p>
+                {/* Step 5: insert getState() */}
+                {account ? (
+                  getState()
+                ) : (
+                  <div className="button" onClick={login}>
+                    <h2>CONNECT WALLET</h2>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <div className="footer">MINTING NOW</div>
+          <div className="footer">
+            <h1>Mint a NFT from FRONTMANIACS now!</h1>
+          </div>
         </div>
       </div>
     </div>

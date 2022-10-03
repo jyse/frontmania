@@ -1,10 +1,10 @@
 import React from "react";
 
-const StartMinting = (props) => {
+const StartMinting = ({ mint }) => {
   return (
     <div className="mintStart">
-      <div onClick={props.mint} className="button">
-        MINT
+      <div onClick={mint} className="button">
+        START MINTING
       </div>
     </div>
   );

@@ -1,27 +1,23 @@
 {
-  "name": "Blue Haired Geisha",
-  "description": "Anime girl",
-  "image": "",
+  "name": "Girl Frontmaniac",
+  "description": "Likes to eat people's hearts",
+  "image": "ipfs://QmSNoKfKiLXncJhTHeEmGqwEqyz7xqXns3ETKBBvpXmrZL/0.png",
   "attributes": [
     {
-      "trait_type": "Hair",
-      "value": "Blue"
+      "trait_type": "Background",
+      "value": "Yellow"
     },
     {
-      "trait_type": "Eyes",
-      "value": "Red"
+      "trait_type": "Hair",
+      "value": "Turqoise"
     },
     {
       "trait_type": "Skin",
-      "value": "Medium"
-    },
-    {
-      "trait_type": "Clothing",
-      "value": "Turqoise Kimono"
+      "value": "Pink"
     },
     {
       "trait_type": "Accessory",
-      "value": "Big Pink Bow"
+      "value": "Little Grey Dress"
     }
   ]
 }

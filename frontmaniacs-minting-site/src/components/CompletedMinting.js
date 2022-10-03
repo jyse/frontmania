@@ -1,14 +1,14 @@
 import React from "react";
 
-const CompletedMinting = ({ address }) => {
+const CompletedMinting = () => {
   const viewOpenSea = () => {
-    const url =
-      "https://testnets.opensea.io/collection/web3builders-eg7du07ybm";
+    // View your collection on Testnet OpenSea (www.testnets.opensea.io)
+    const url = "";
     window.open(url, "_blank");
   };
 
   return (
-    <div>
+    <div className="minting-success">
       <div>All set! You NFT has been minted.</div>
       <div className="button" onClick={viewOpenSea}>
         VIEW OPENSEA
