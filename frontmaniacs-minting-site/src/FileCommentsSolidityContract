@@ -15,6 +15,7 @@ contract Frontmaniacs is ERC721, ERC721Enumerable, Ownable {
     uint256 maxSupply = 1000; 
 
     function _baseURI() internal pure override returns (string memory) {
+        
         return "ipfs://QmRkEy66AczB2yT4mzicSW1sPLhUiM98AwBiKC1aEDHqnC/";
     }
 
@@ -26,12 +27,10 @@ contract Frontmaniacs is ERC721, ERC721Enumerable, Ownable {
     function safeMint() public payable {
         // Step 6: Make the safeMint function payable
         // Step 6a: Add a requirement of msg.value >= 0.01 ether
-        require(msg.value >= 0.01 ether, "Give us more money");
         // Step 7: Ethereum Metric System
         // Step 8: use SafeMint again without value
         // Step 9: use SafeMint again WITH value
         // Step 10: Add a requirement of totalSupply() <= maxSupply
-        require(totalSupply() <= maxSupply, "You have reached the limit of minting!");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
