@@ -128,7 +128,8 @@ body p {
 }
 
 .mint {
-  background-color: rgb(128, 0, 109);
+  background-color: yellow;
+  color: black;
 }
 
 .progress {
