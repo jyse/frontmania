@@ -31,7 +31,7 @@ contract Frontmaniacs is ERC721, ERC721Enumerable, Ownable {
         // Step 8: use SafeMint again without value
         // Step 9: use SafeMint again WITH value
         // Step 10: Add a requirement of totalSupply() <= maxSupply
-        require(totalSupply() <= maxSupply, "You have reached the limit of minting!");
+        require(totalSupply() <= maxSupply, "You have reached the limit");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
