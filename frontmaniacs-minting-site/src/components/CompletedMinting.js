@@ -4,7 +4,7 @@ import openSeaLogo from "../assets/openSeaLogo.svg";
 const CompletedMinting = () => {
   const viewOpenSea = () => {
     // Step 13: View your collection on Testnet OpenSea
-    const url = "https://testnets.opensea.io/collection/frontmania";
+    const url = "https://testnets.opensea.io/collection/frontmaniacs-ultimate";
 
     // Step 14: In case you DON'T SEE your collection on Testnet OpenSea
     const nftURL =

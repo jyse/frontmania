@@ -59,7 +59,7 @@ function App() {
       setAccount(walletAccount);
 
       // Step 4: Wire up contract (provider, signer, NFTContract)
-      const contractAddress = "0x380A66B9aE2ABBc41d546AF0482A18f91B226d0b";
+      const contractAddress = "0x03FBD5f7A87A8AE4A4A68dfB2cd359ecD679cb06";
 
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner(walletAccount);
