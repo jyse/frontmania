@@ -9,21 +9,24 @@ import nftImage from "./assets/NFTImage.png";
 import { ethers } from "ethers";
 import abi from "./manual/abi.json";
 
+// Step 1: Run the app
+
 function App() {
   const [inProgress, setInProgress] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState(true);
   const [account, setAccount] = useState();
   const [contract, setContract] = useState();
   const [supply, setSupply] = useState(0);
   const [hash, setHash] = useState();
 
   const mint = async () => {
+    // Step 6: Write the mint function
     const payload = { value: ethers.utils.parseEther("0.01") };
     const transaction = await contract.safeMint(payload);
     console.log(transaction.hash, "🧾 transaction hash");
     setHash(transaction.hash);
 
-    // Step 7: Set the variables for progress and completed
+    // Step 9: Set the variables for progress and completed
     setInProgress(true);
     await transaction.wait();
     setInProgress(false);
@@ -31,10 +34,12 @@ function App() {
   };
 
   const getTotalSupply = async () => {
+    // Step 5: Contract => getTotalSupply()
     const totalSupply = await contract.totalSupply();
     setSupply(totalSupply.toNumber());
   };
 
+  // Step 5: Contract => getTotalSupply()
   useEffect(() => {
     if (contract) {
       getTotalSupply();
@@ -42,6 +47,7 @@ function App() {
   }, [contract]);
 
   const login = async () => {
+    // Step 2: Connect wallet (check Metamask + accounts)
     if (typeof window.ethereum !== "undefined") {
       console.log("Yayy Metamask is installed");
 
@@ -52,6 +58,7 @@ function App() {
       console.log(walletAccount, "🦊 Metamask account!");
       setAccount(walletAccount);
 
+      // Step 4: Wire up contract (provider, signer, NFTContract)
       const contractAddress = "0x380A66B9aE2ABBc41d546AF0482A18f91B226d0b";
 
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -65,7 +72,9 @@ function App() {
 
   const getState = () => {
     if (inProgress) {
-      // Step 8: Pass in the transaction hash to InProgressMinting Component
+      // Step 10: Pass in the transaction hash to InProgressMinting Component
+      // Step 11: Check Etherscan when the NFT is in progress of being minted
+      // Step 12: View your collection on Testnet OpenSea
       return <InProgressMinting hash={hash} />;
     }
 
@@ -73,7 +82,7 @@ function App() {
       return <CompletedMinting />;
     }
 
-    // Step 6: Pass mint as props
+    // Step 8: Pass mint as props
     return <StartMinting mint={mint} />;
   };
 
@@ -98,11 +107,12 @@ function App() {
               </div>
               <div className="information-interactions-container">
                 <p> {supply} / 1000 minted </p>
-                {/* // Step 5: insert getState() */}
+                {/* // Step 3: Render a mint button conditionally */}
+                {/* // Step 7: insert getState() */}
                 {account ? (
                   getState()
                 ) : (
-                  <div className="button" onClick={login}>
+                  <div className="button connect" onClick={login}>
                     Connect Wallet
                   </div>
                 )}

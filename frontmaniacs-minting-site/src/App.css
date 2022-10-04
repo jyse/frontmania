@@ -114,7 +114,6 @@ body p {
 .button {
   padding: 12px 40px;
   width: 100%;
-  background-color: #54bcd4;
   border-radius: 40px;
   color: white;
   cursor: pointer;
@@ -122,6 +121,32 @@ body p {
   font-weight: bold;
   display: flex;
   justify-content: center;
+}
+
+.connect {
+  background-color: #54bcd4;
+}
+
+.mint {
+  background-color: rgb(128, 0, 109);
+}
+
+.progress {
+  background-color: white;
+  color: black;
+}
+
+.open-sea {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: black;
+}
+
+.openSeaLogo {
+  width: 40px;
+  height: 40px;
+  margin: 0px 7px;
 }
 
 .minting-success {
