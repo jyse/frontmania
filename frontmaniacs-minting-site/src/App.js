@@ -13,7 +13,7 @@ import abi from "./manual/abi.json";
 
 function App() {
   const [inProgress, setInProgress] = useState(false);
-  const [completed, setCompleted] = useState(true);
+  const [completed, setCompleted] = useState(false);
   const [account, setAccount] = useState();
   const [contract, setContract] = useState();
   const [supply, setSupply] = useState(0);
@@ -72,13 +72,12 @@ function App() {
 
   const getState = () => {
     if (inProgress) {
-      // Step 10: Pass in the transaction hash to InProgressMinting Component
-      // Step 11: Check Etherscan when the NFT is in progress of being minted
-      // Step 12: View your collection on Testnet OpenSea
+      // Step 10: Pass in the transaction hash to InProgressMinting Component and check this component
       return <InProgressMinting hash={hash} />;
     }
 
     if (completed) {
+      // Step 12: Check this component
       return <CompletedMinting />;
     }
 
