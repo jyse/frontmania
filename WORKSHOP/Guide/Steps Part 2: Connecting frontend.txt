@@ -40,7 +40,7 @@
 
 💠 Step 4: Wire up contract (provider, signer, NFTContract)
 👉 Import ethers at the top of our code: import {ethers} from “ethers”
-👉 Remember your contract address? Copy and paste it here
+👉 Remember your contract address? Copy and paste it here (still in the login function)
 ❗If you forgot your contract address, check your terminal in Remix and try to find the latest contract creation by also checking etherscan links!
 🙋‍♂️🙋‍♀️ Otherwise ask me or my support team, to get a contractAddress and make sure to ask about an abi
 👉 Make a contractAddress variable and set your contractAddress as a value
