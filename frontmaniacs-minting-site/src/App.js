@@ -5,7 +5,7 @@ import InProgressMinting from "./components/InProgressMinting";
 import CompletedMinting from "./components/CompletedMinting";
 import Header from "./components/Header";
 import bgVideo from "./assets/backgroundVideo.mp4";
-import nftImage from "./assets/NFTImage.png";
+import nftImage from "./assets/1.png";
 import { ethers } from "ethers";
 import abi from "./manual/abi.json";
 
@@ -18,21 +18,29 @@ function App() {
   const [contract, setContract] = useState();
   const [supply, setSupply] = useState(0);
   const [hash, setHash] = useState();
+  const [tokenId, setTokenId] = useState(0);
 
   const mint = async () => {
     // Step 6: Write the mint function
-    const payload = { value: ethers.utils.parseEther("0.01") };
-    const transaction = await contract.safeMint(payload);
-    console.log(transaction.hash, "🧾 transaction hash");
-    setHash(transaction.hash);
 
-    // Step 9: Set the variables for progress and completed
-    setInProgress(true);
-    await transaction.wait();
-    setInProgress(false);
-    setCompleted(true);
+    try {
+      const requiredPayment = ethers.utils.parseEther("0.0001"); // 0.0001 ether
+      console.log(contract, "what is contract?");
+      const tx = await contract.mint(tokenId, 1, {
+        value: requiredPayment
+      });
+      console.log(tx, "what is tx?");
+      setTokenId(tokenId++);
+      setInProgress(true);
+      await tx.wait();
+      setHash(tx.hash);
+      console.log("NFT minted successfully!");
+      setInProgress(false);
+      setCompleted(true);
+    } catch (error) {
+      console.log("error");
+    }
   };
-
   const getTotalSupply = async () => {
     // Step 5: Contract => getTotalSupply()
     const totalSupply = await contract.totalSupply();
@@ -59,12 +67,19 @@ function App() {
       setAccount(walletAccount);
 
       // Step 4: Wire up contract (provider, signer, NFTContract)
-      const contractAddress = "0x03FBD5f7A87A8AE4A4A68dfB2cd359ecD679cb06";
+      const contractAddress = "0x1c9636cf3b7F4089a00Db1ca364b6C5D5f510865";
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner(walletAccount);
+      const provider = new ethers.providers.JsonRpcProvider(
+        "https://rpc-mumbai.matic.today"
+      );
+      // const signer = provider.getSigner(walletAccount);
+      const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
-      let NFTContract = new ethers.Contract(contractAddress, abi, signer);
+      const NFTContract = new ethers.Contract(
+        contractAddress,
+        ["function mint(uint256 id, uint256 amount) payable"],
+        wallet
+      );
       console.log(NFTContract, "📝 NFT Contract");
       setContract(NFTContract);
     }
